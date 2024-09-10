@@ -90,11 +90,7 @@ router.put("/update/:id", async (req, res) => {
 router.delete("/delete/:id", async (req, res) => {
    const id_car = req.params.id;
    try {
-      deletedCar = await carModel.findByIdAndDelete(id_car);
-
-      if (!deletedCar) {
-         return res.status(404).json({ message: "Car not found" });
-      }
+      let deletedCar = await carModel.findByIdAndDelete(id_car);
 
       return res.status(204).json();
    } catch (error) {
