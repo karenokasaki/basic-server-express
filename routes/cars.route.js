@@ -28,22 +28,6 @@ router.get("/all", async (req, res) => {
 });
 
 // localhost:4000/cars/create
-router.get("/:id", async (req, res) => {
-   const id_car = req.params.id;
-   try {
-      const car = await carModel.findById(id_car);
-
-      if (!car) {
-         return res.status(404).json({ message: "Car not found" });
-      }
-
-      return res.status(200).json(car);
-   } catch (error) {
-      return res.status(500).json({ message: "Something went wrong", error });
-   }
-});
-
-// localhost:4000/cars/create
 router.post("/create", async (req, res) => {
    const car = req.body;
    console.log(car);
@@ -93,6 +77,33 @@ router.delete("/delete/:id", async (req, res) => {
       let deletedCar = await carModel.findByIdAndDelete(id_car);
 
       return res.status(204).json();
+   } catch (error) {
+      return res.status(500).json({ message: "Something went wrong", error });
+   }
+});
+
+//localhost:4000/cars/random
+router.get("/random", async (req, res) => {
+   try {
+      const cars = await carModel.find();
+      const randomCar = cars[Math.floor(Math.random() * cars.length)];
+      return res.status(200).json(randomCar);
+   } catch (error) {
+      return res.status(500).json({ message: "Something went wrong", error });
+   }
+});
+
+// localhost:4000/cars/create
+router.get("/:id", async (req, res) => {
+   const id_car = req.params.id;
+   try {
+      const car = await carModel.findById(id_car);
+
+      if (!car) {
+         return res.status(404).json({ message: "Car not found" });
+      }
+
+      return res.status(200).json(car);
    } catch (error) {
       return res.status(500).json({ message: "Something went wrong", error });
    }
