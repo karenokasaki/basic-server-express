@@ -5,6 +5,7 @@ import connectDB from "./config/db.config.js";
 
 /* routes */
 import carsRouter from "./routes/cars.route.js";
+import restaurantsRouter from "./routes/restaurants.route.js";
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/cars", carsRouter);
+app.use("/restaurants", restaurantsRouter);
 
 app.listen(4000, () => {
    console.log("Server is running on port 4000");
