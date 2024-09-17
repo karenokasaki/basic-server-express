@@ -15,7 +15,7 @@ router.get("/", (req, res) => {
 // localhost:4000/restaurants/all
 router.get("/all", async (req, res) => {
    try {
-      const restaurants = await SampleRestaurant.find().limit(200);
+      const restaurants = await SampleRestaurant.find();
       return res.status(200).json(restaurants);
    } catch (error) {
       return res.status(500).json({ message: "Something went wrong", error });
